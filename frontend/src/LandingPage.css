@@ -1,0 +1,41 @@
+.landing-container {
+  padding: 20px;
+  background-color: #111;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.category-section {
+
+  margin-bottom: 30px;
+}
+
+.movie-slider {
+  display: flex;
+  gap: 15px;
+  /* overflow-x: auto; */
+  padding: 10px 0;
+}
+
+.movie-card {
+  min-width: 150px;
+  background-color: #222;
+  border-radius: 8px;
+  text-align: center;
+  padding: 10px;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+
+Link p {
+    text-decoration: none;
+}

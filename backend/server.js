@@ -9,7 +9,7 @@ const app = express()
 app.use(cors({
 //   origin: 'http://localhost:3000', // Allow requests from the frontend
 
-    origin :'https://capstone-movie-app.vercel.app/',
+    origin :'https://capstone-movie-app.vercel.app',
 
   credentials: true, // Allow cookies (e.g., connect.sid for sessions)
 }));

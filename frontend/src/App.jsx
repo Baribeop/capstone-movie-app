@@ -1,32 +1,3 @@
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { AuthProvider } from './context/AuthContext';
-// import Navbar from './components/Navbar';
-// import Home from './pages/Home';
-// import MovieDetails from './pages/MovieDetails';
-// // import Favorites from './pages/Favorites';
-// import Login from './components/Login';
-// import Signup from './components/SignUp';
-// import Favorites from './pages/Favourites';
-// // 
-
-// function App() {
-//   return (
-//     <AuthProvider>
-//       <Router>
-//         <Navbar />
-//         <Routes>
-//           <Route path="/" element={<Home />} />
-//           <Route path="/movie/:id" element={<MovieDetails />} />
-//           <Route path="/favorites" element={<Favorites />} />
-//           <Route path="/login" element={<Login />} />
-//           <Route path="/signup" element={<Signup />} />
-//         </Routes>
-//       </Router>
-//     </AuthProvider>
-//   );
-// }
-
-// export default App;
 
 
 // frontend/src/App.jsx
@@ -77,3 +48,32 @@ function App() {
 export default App;
 
 
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { AuthProvider } from './context/AuthContext';
+// import Navbar from './components/Navbar';
+// import Home from './pages/Home';
+// import MovieDetails from './pages/MovieDetails';
+// // import Favorites from './pages/Favorites';
+// import Login from './components/Login';
+// import Signup from './components/SignUp';
+// import Favorites from './pages/Favourites';
+// // 
+
+// function App() {
+//   return (
+//     <AuthProvider>
+//       <Router>
+//         <Navbar />
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/movie/:id" element={<MovieDetails />} />
+//           <Route path="/favorites" element={<Favorites />} />
+//           <Route path="/login" element={<Login />} />
+//           <Route path="/signup" element={<Signup />} />
+//         </Routes>
+//       </Router>
+//     </AuthProvider>
+//   );
+// }
+
+// export default App;

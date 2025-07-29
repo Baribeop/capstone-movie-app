@@ -1,3 +1,98 @@
+
+import { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+
+function MovieDetails() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [error, setError] = useState("");
+  const { user, token } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => { 
+    axios.get(`/api/movies/${id}`)
+      .then((res) => {
+        if (!res.data) throw new Error("No movie data returned");
+        // console.log(res.data)
+        setMovie(res.data);
+      })
+      .catch((err) => {
+        const errorMsg = err.response?.data?.message || "Error fetching movie details";
+        setError(errorMsg);
+      });
+  }, [id]);
+
+  const addToFavorites = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    try {
+      await axios.post(
+        `/api/movies/favorites/${id}`,
+        // { movieId: Number(id) },
+        {
+          withCredentials: true,
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        }
+      );
+      alert("Added to favorites!");
+    } catch (err) {
+      alert(err.response?.data?.message || "Error adding to favorites");
+    }
+  };
+
+  if (error) return <div className="alert alert-danger text-center mt-4">{error}</div>;
+  if (!movie) return <div className="text-center mt-4 text-light">Loading movie details...</div>;
+
+  return (
+    <div className="container mt-5">
+      <div className="card bg-dark text-white shadow-lg">
+        <div className="row g-0">
+          <div className="col-md-5">
+            <img
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : "https://placehold.co/500x750?text=No+Poster"
+              }
+              className="img-fluid h-100"
+              alt={movie.title || "Movie poster"}
+              style={{
+                objectFit: "cover",
+                borderRadius: "0.5rem 0 0 0.5rem",
+              }}
+            />
+          </div>
+          <div className="col-md-7 p-4">
+            <h2 className="mb-3">{movie.title || "Unknown Title"}</h2>
+            {/* <p className="lead">{movie.overview || "No description available."}</p> */}
+            <hr className="border-light" />
+              <p><strong>Overview:</strong> {movie.overview || "No description available."}</p>
+              <p><strong>Genres:</strong> {movie.genres.map(g => g.name).join(', ')}</p>
+              <p><strong>Release Date:</strong> {movie.release_date || "Unknown"}</p>
+              <p><strong>Runtime:</strong> {movie.runtime} minutes</p>
+              <p><strong>Rating:</strong> {movie.vote_average || "N/A"}/10</p>
+              <p><strong>Production Companies:</strong> {movie.production_companies.map(p => p.name).join(', ')}</p>
+              <p><strong>Homepage:</strong> <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a></p>
+            {user && (
+              <button onClick={addToFavorites} className="btn btn-primary mt-3">
+                Add to Favorites
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default MovieDetails;
+
+
+
 // import { useState, useEffect, useContext } from 'react';
 // import { useParams } from 'react-router-dom';
 // import axios from 'axios';
@@ -481,96 +576,3 @@
 // }
 
 // export default MovieDetails;
-
-
-import { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
-
-function MovieDetails() {
-  const { id } = useParams();
-  const [movie, setMovie] = useState(null);
-  const [error, setError] = useState("");
-  const { user, token } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  useEffect(() => { 
-    axios.get(`/api/movies/${id}`)
-      .then((res) => {
-        if (!res.data) throw new Error("No movie data returned");
-        // console.log(res.data)
-        setMovie(res.data);
-      })
-      .catch((err) => {
-        const errorMsg = err.response?.data?.message || "Error fetching movie details";
-        setError(errorMsg);
-      });
-  }, [id]);
-
-  const addToFavorites = async () => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
-    try {
-      await axios.post(
-        `/api/movies/favorites/${id}`,
-        // { movieId: Number(id) },
-        {
-          withCredentials: true,
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        }
-      );
-      alert("Added to favorites!");
-    } catch (err) {
-      alert(err.response?.data?.message || "Error adding to favorites");
-    }
-  };
-
-  if (error) return <div className="alert alert-danger text-center mt-4">{error}</div>;
-  if (!movie) return <div className="text-center mt-4 text-light">Loading movie details...</div>;
-
-  return (
-    <div className="container mt-5">
-      <div className="card bg-dark text-white shadow-lg">
-        <div className="row g-0">
-          <div className="col-md-5">
-            <img
-              src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                  : "https://placehold.co/500x750?text=No+Poster"
-              }
-              className="img-fluid h-100"
-              alt={movie.title || "Movie poster"}
-              style={{
-                objectFit: "cover",
-                borderRadius: "0.5rem 0 0 0.5rem",
-              }}
-            />
-          </div>
-          <div className="col-md-7 p-4">
-            <h2 className="mb-3">{movie.title || "Unknown Title"}</h2>
-            {/* <p className="lead">{movie.overview || "No description available."}</p> */}
-            <hr className="border-light" />
-              <p><strong>Overview:</strong> {movie.overview || "No description available."}</p>
-              <p><strong>Genres:</strong> {movie.genres.map(g => g.name).join(', ')}</p>
-              <p><strong>Release Date:</strong> {movie.release_date || "Unknown"}</p>
-              <p><strong>Runtime:</strong> {movie.runtime} minutes</p>
-              <p><strong>Rating:</strong> {movie.vote_average || "N/A"}/10</p>
-              <p><strong>Production Companies:</strong> {movie.production_companies.map(p => p.name).join(', ')}</p>
-              <p><strong>Homepage:</strong> <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a></p>
-            {user && (
-              <button onClick={addToFavorites} className="btn btn-primary mt-3">
-                Add to Favorites
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default MovieDetails;

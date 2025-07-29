@@ -15,10 +15,10 @@ app.use(cors({
 }));
 
 
-app.use(cors({
-  origin: 'http://localhost:5173', // Vite default port
-  credentials: true
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5173', // Vite default port
+//   credentials: true
+// }));
 
 
 const session = require('express-session')

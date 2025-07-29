@@ -69,7 +69,7 @@ function Favorites() {
         const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY
         const moviePromises = res.data.favourites.map((movieId) =>
           // axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US`)
-          axios.get(`https://api/favorites/${movieId}`)
+          axios.get(`/favorites/${movieId}`)
         );
         const movieResponses = await Promise.all(moviePromises);
         setFavorites(movieResponses.map((res) => res.data));

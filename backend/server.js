@@ -9,7 +9,7 @@ const app = express()
 app.use(cors({
 //   origin: 'http://localhost:3000', // Allow requests from the frontend
 
-    origin :'http://localhost:5173/',
+    origin :'https://vercel.com/baribeops-projects/capstone-movie-app',
 
   credentials: true, // Allow cookies (e.g., connect.sid for sessions)
 }));

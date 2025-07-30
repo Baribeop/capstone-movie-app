@@ -13,7 +13,7 @@ const LandingPage = () => {
   });
 
   useEffect(() => {
-    axios.get(`${VITE_BASE_URL}/api/movies/categories`)
+    axios.get(`${import.meta.env.VITE_BASE_URL}/api/movies/categories`)
       // .then(res => res.json())
       .then(res => setMovies(res.data))
       .catch(err => console.error('Failed to fetch movies:', err));

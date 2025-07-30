@@ -60,7 +60,7 @@ function Favorites() {
 
     const fetchFavorites = async () => {
       try {
-        const res = await axios.get(`${VITE_BASE_URL}/api/users`, {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/users`, {
           withCredentials: true,
           headers: token ? { Authorization: `Bearer ${token}` } : {},
 
@@ -69,7 +69,7 @@ function Favorites() {
         const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY
         const moviePromises = res.data.favourites.map((movieId) =>
           // axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US`)
-          axios.get(`${VITE_BASE_URL}/favorites/${movieId}`)
+          axios.get(`${import.meta.env.VITE_BASE_URL}/favorites/${movieId}`)
         );
         const movieResponses = await Promise.all(moviePromises);
         setFavorites(movieResponses.map((res) => res.data));

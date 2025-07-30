@@ -9,7 +9,7 @@ const app = express()
 app.use(cors({
 //   origin: 'http://localhost:3000', // Allow requests from the frontend
 
-    origin :'https://movie-app-theta-virid.vercel.app',
+    origin :'https://movie-app-alpha-swart.vercel.app',
 
   credentials: true, // Allow cookies (e.g., connect.sid for sessions)
 }));

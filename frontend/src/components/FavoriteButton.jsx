@@ -14,7 +14,7 @@ function FavoriteButton({ movieId }) {
     }
 
     try {
-      await axios.post("/movies/favorites", { movieId }, {
+      await axios.post(`${VITE_BASE_URL}/movies/favorites`, { movieId }, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       alert("Added to favorites!");

@@ -1,9 +1,0 @@
-
-{
-  "rewrites": [
-    {
-      "source": "/api/:match*",
-      "destination": "https://capstone-movie-app.onrender.com/api/:match*"
-    }
-  ]
-}

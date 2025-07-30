@@ -142,7 +142,7 @@ function Home() {
           setError("");
         } else {
           console.log("Fetching popular movies");
-          const res = await axios.get("/api/movies/discover?page=1");
+          const res = await axios.get(`${VITE_BASE_URL}/api/movies/discover?page=1`);
           console.log("Popular movies response:", res.data);
           setSearchResults(res.data.results || []);
           setIsSearch(false);
@@ -161,7 +161,7 @@ function Home() {
   const loadMoreItems = async () => {
     try {
       const nextPage = pageNum + 1;
-      const res = await axios.get(`/api/movies/discover?page=${nextPage}`);
+      const res = await axios.get(`${VITE_BASE_URL}/api/movies/discover?page=${nextPage}`);
       console.log("Load more response:", res.data);
       setSearchResults(prevResults => [...prevResults, ...res.data.results]);
       setPageNum(nextPage);

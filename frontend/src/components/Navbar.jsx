@@ -11,7 +11,7 @@ function Navbar() {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`/api/movies/search?query=${encodeURIComponent(search)}`, {
+      const res = await axios.get(`${VITE_BASE_URL}/api/movies/search?query=${encodeURIComponent(search)}`, {
         withCredentials: true,
       });
       navigate('/', { state: { searchResults: res.data.results } });

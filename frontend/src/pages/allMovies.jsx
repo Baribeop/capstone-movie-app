@@ -8,7 +8,7 @@ function AllMovies() {
   const navigate = useNavigate();
 
   useEffect( async() => {
-   await  axios.get("/movies/discover")
+   await  axios.get(`${VITE_BASE_URL}/movies/discover`)
       .then((res) => setMovies(res.data))
       .catch(() => setError("Unable to fetch movies"));
   }, []);

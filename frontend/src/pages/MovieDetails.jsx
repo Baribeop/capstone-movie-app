@@ -12,7 +12,7 @@ function MovieDetails() {
   const navigate = useNavigate();
 
   useEffect(() => { 
-    axios.get(`/api/movies/${id}`)
+    axios.get(`${VITE_BASE_URL}/api/movies/${id}`)
       .then((res) => {
         if (!res.data) throw new Error("No movie data returned");
         // console.log(res.data)
@@ -31,7 +31,7 @@ function MovieDetails() {
     }
     try {
       await axios.post(
-        `/api/movies/favorites/${id}`,
+        `${VITE_BASE_URL}/api/movies/favorites/${id}`,
         // { movieId: Number(id) },
         {
           withCredentials: true,
